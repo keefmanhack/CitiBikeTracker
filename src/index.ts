@@ -2,7 +2,11 @@ import axios from 'axios'
 import fs from 'fs'
 // const { Upload } = require("@aws-sdk/lib-storage");
 var AWS = require('aws-sdk');
+const express = require('express')
 require('dotenv').config();
+const app = express()
+
+
 
 const s3 = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -73,4 +77,8 @@ const main = async () => {
         // Periodically every five minutes
 main()
 setInterval(main, 5*60*1000);
+
+const PORT = process.env.PORT || 3000
+
+app.listen(PORT, () => console.log(`Server running on ${PORT}`))
 
